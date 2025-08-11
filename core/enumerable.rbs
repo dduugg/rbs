@@ -1300,6 +1300,27 @@ module Enumerable[unchecked out Elem] : _Each[Elem]
 
   # <!--
   #   rdoc-file=enum.c
+  #   - select {|element| ... } -> array
+  #   - select -> enumerator
+  # -->
+  # Returns an array containing elements selected by the block.
+  #
+  # With a block given, calls the block with successive elements;
+  # returns an array of those elements for which the block returns a truthy value:
+  #
+  #   (0..9).select {|element| element % 3 == 0 } # => [0, 3, 6, 9]
+  #   a = {foo: 0, bar: 1, baz: 2}.select {|key, value| key.start_with?('b') }
+  #   a # => {:bar=>1, :baz=>2}
+  #
+  # With no block given, returns an Enumerator.
+  #
+  # Related: #reject.
+  #
+  def select: () { (Elem) -> boolish } -> ::Array[Elem]
+            | () -> ::Enumerator[Elem, ::Array[Elem]]
+
+  # <!--
+  #   rdoc-file=enum.c
   #   - sort               -> array
   #   - sort {|a, b| ... } -> array
   # -->
